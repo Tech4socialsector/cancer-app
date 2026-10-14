@@ -58,20 +58,26 @@
   "clinical_findings",
   "leukoplakia",
   "if_leukoplakia__is_yes",
+  "if_site",
+  "if_size",
   "if_single_lesion",
   "if_heterogenous",
   "if_multiple_lesion",
   "if_hetro",
   "erthyroplakia",
   "if_erthyroplakia_yes",
-  "column_break_mhhp",
+  "if_site_copy",
+  "if_size_copy",
   "oral_submucous_fibrosis",
   "if_oral_submucous_fibrosis_yes",
   "non_healing_ulcer",
   "if_non_healing_ulcer_yes",
+  "if_site_copy_copy",
+  "if_size_copy_copy",
   "smoker_palate",
   "lichen_planus",
   "if_lichen_planus_yes",
+  "column_break_mhhp",
   "oral_lichenoid_reaction",
   "if_oral_lichenoid_reaction_yes",
   "others",
@@ -80,6 +86,60 @@
   "melanoplakia",
   "nodule",
   "if_nodule_yes",
+  "ulcer",
+  "if_ulcer",
+  "site_ulcer",
+  "size_ulcer",
+  "tobacco_pouch_keratosis",
+  "if_tobacco_pouch_keratosi_yes",
+  "other",
+  "others_o",
+  "h5cancerous_lesionh",
+  "cancerous_lesion",
+  "if_cancerous_lesion_yes",
+  "site_can",
+  "if_size_ca",
+  "appearance",
+  "h5significant_cervical_nodesh",
+  "significant_cervical_nodes",
+  "refferal",
+  "if_refferal_yes",
+  "if__referral_for_cancerous_lesion",
+  "if_no_is_chosen_then_screening_is_completed",
+  "breast_screening_section",
+  "breast_symptoms",
+  "right_breast_on_palpation",
+  "left_breast_on_palpation",
+  "breast_nipple_discharge",
+  "column_break_breast",
+  "breast_referral",
+  "breast_referred_for",
+  "breast_screening_completed_note",
+  "cervical_screening_section",
+  "cervical_screening_status",
+  "cervical_screening",
+  "cervical_not_done_reason",
+  "cervical_reenter_date",
+  "cervical_symptoms",
+  "cervical_abnormal_bleeding",
+  "cervical_abnormal_bleeding_other",
+  "cervical_visual_inspection",
+  "cervical_visual_inspection_findings",
+  "column_break_cervical",
+  "hr_hpv_dna",
+  "hr_hpv_dna_report_date",
+  "hr_hpv_dna_result",
+  "hr_hpv_dna_report",
+  "hr_hpv_genotype",
+  "cytology",
+  "cytology_report_date",
+  "cytology_report",
+  "visual_test",
+  "visual_test_report_date",
+  "visual_test_report",
+  "cervical_referral",
+  "cervical_referred_for",
+  "cervical_screening_completed_note",
   "tab_2_tab"
  ],
  "fields": [
@@ -320,7 +380,7 @@
   {
    "fieldname": "test_section",
    "fieldtype": "Section Break",
-   "label": "Oral Screening \u2013 Questionnaire"
+   "label": "Oral Screening – Questionnaire"
   },
   {
    "fieldname": "oral_examination",
@@ -335,10 +395,11 @@
    "options": "\nYes\nNo"
   },
   {
+   "depends_on": "eval:doc.tobacco_user==\"Yes\"",
    "fieldname": "yesoral",
    "fieldtype": "Select",
    "label": "If Yes",
-   "options": "Ulcer in the mouth\nSwelling \u2013 neck/oral cavity\nDifficulty in swallowing\nChange in voice\nSharp teeth/ denture if yes (a open field to enter details)\nOthers"
+   "options": "Ulcer in the mouth\nSwelling – neck/oral cavity\nDifficulty in swallowing\nChange in voice\nSharp teeth/ denture if yes (a open field to enter details)\nOthers"
   },
   {
    "fieldname": "symptoms",
@@ -369,7 +430,7 @@
    "fieldname": "if_leukoplakia__is_yes",
    "fieldtype": "Select",
    "label": "If Leukoplakia Yes",
-   "options": "\nSite (To be entered manually)\nSize (To be entered manually)\nSingle lesion\nMultiple lesion"
+   "options": "\nSite\nSize\nSingle lesion\nMultiple lesion"
   },
   {
    "depends_on": "eval:doc.if_leukoplakia__is_yes==\"Single lesion\"",
@@ -410,7 +471,7 @@
    "fieldname": "if_erthyroplakia_yes",
    "fieldtype": "Select",
    "label": "If Erthyroplakia Yes",
-   "options": "\nSite (To be entered manually)\nSize (To be entered manually)"
+   "options": "\nSite\nSize"
   },
   {
    "fieldname": "column_break_mhhp",
@@ -439,7 +500,7 @@
    "fieldname": "if_non_healing_ulcer_yes",
    "fieldtype": "Select",
    "label": "If Non healing ulcer Yes",
-   "options": "\nSite (To be entered manually)\nSize (To be entered manually)"
+   "options": "\nSite\nSize"
   },
   {
    "fieldname": "smoker_palate",
@@ -456,9 +517,8 @@
   {
    "depends_on": "eval:doc.lichen_planus==\"Yes\"",
    "fieldname": "if_lichen_planus_yes",
-   "fieldtype": "Select",
-   "label": "If Lichen planus Yes",
-   "options": "\nSite (To be entered manually)"
+   "fieldtype": "Data",
+   "label": "If Lichen planus Yes"
   },
   {
    "fieldname": "oral_lichenoid_reaction",
@@ -469,7 +529,7 @@
   {
    "depends_on": "eval:doc.oral_lichenoid_reaction==\"Yes\"",
    "fieldname": "if_oral_lichenoid_reaction_yes",
-   "fieldtype": "Select",
+   "fieldtype": "Data",
    "label": "If Oral lichenoid reaction Yes"
   },
   {
@@ -504,19 +564,416 @@
   {
    "depends_on": "eval:doc.nodule==\"Yes\"",
    "fieldname": "if_nodule_yes",
-   "fieldtype": "Select",
+   "fieldtype": "Data",
    "label": "If Nodule Yes"
+  },
+  {
+   "fieldname": "breast_screening_section",
+   "fieldtype": "Section Break",
+   "label": "Breast Screening – Questionnaire"
+  },
+  {
+   "fieldname": "breast_symptoms",
+   "fieldtype": "Select",
+   "label": "Symptoms",
+   "options": "\nYes\nNo",
+   "reqd": 1
+  },
+  {
+   "fieldname": "right_breast_on_palpation",
+   "fieldtype": "Table MultiSelect",
+   "label": "Right Breast on palpation",
+   "options": "Breast Palpation Child",
+   "depends_on": "eval:doc.breast_symptoms",
+   "mandatory_depends_on": "eval:doc.breast_symptoms"
+  },
+  {
+   "fieldname": "left_breast_on_palpation",
+   "fieldtype": "Table MultiSelect",
+   "label": "Left Breast on palpation",
+   "options": "Breast Palpation Child",
+   "depends_on": "eval:doc.breast_symptoms",
+   "mandatory_depends_on": "eval:doc.breast_symptoms"
+  },
+  {
+   "fieldname": "breast_nipple_discharge",
+   "fieldtype": "Select",
+   "label": "Nipple Discharge",
+   "options": "\nYes for right breast\nYes for left breast\nYes for both breasts\nNo for both breasts",
+   "depends_on": "eval:doc.breast_symptoms",
+   "mandatory_depends_on": "eval:doc.breast_symptoms"
+  },
+  {
+   "fieldname": "column_break_breast",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "breast_referral",
+   "fieldtype": "Select",
+   "label": "Referral",
+   "options": "\nYes\nNo",
+   "depends_on": "eval:doc.breast_nipple_discharge"
+  },
+  {
+   "fieldname": "breast_referred_for",
+   "fieldtype": "Table MultiSelect",
+   "label": "Referred for",
+   "options": "Breast Referral Child",
+   "depends_on": "eval:doc.breast_referral==\"Yes\"",
+   "description": "Choosing this will move patient to clinical evaluation"
+  },
+  {
+   "fieldname": "breast_screening_completed_note",
+   "fieldtype": "HTML",
+   "label": "Screening Completed",
+   "options": "<p><b>Screening is completed.</b> Patient will NOT move to clinical evaluation.</p>",
+   "depends_on": "eval:doc.breast_referral==\"No\""
+  },
+  {
+   "fieldname": "cervical_screening_section",
+   "fieldtype": "Section Break",
+   "label": "Cervical Screening – Questionnaire"
+  },
+  {
+   "fieldname": "cervical_screening_status",
+   "fieldtype": "Data",
+   "label": "Cervical Screening Status",
+   "read_only": 1,
+   "description": "Set automatically on save. Stays Pending while any answer is Not now."
+  },
+  {
+   "fieldname": "cervical_screening",
+   "fieldtype": "Select",
+   "label": "Cervical Screening",
+   "options": "\nDone\nNot Done\nNot now",
+   "reqd": 1
+  },
+  {
+   "fieldname": "cervical_not_done_reason",
+   "fieldtype": "Select",
+   "label": "Reason",
+   "options": "\nPatient in periods\nNot willing\nPost Hysterectomy\nOthers",
+   "depends_on": "eval:[\"Not Done\",\"Not now\"].includes(doc.cervical_screening)"
+  },
+  {
+   "fieldname": "cervical_reenter_date",
+   "fieldtype": "Date",
+   "label": "Re-enter Date",
+   "description": "Date to re-enter cervical screening",
+   "depends_on": "eval:[\"Not Done\",\"Not now\"].includes(doc.cervical_screening)"
+  },
+  {
+   "fieldname": "cervical_symptoms",
+   "fieldtype": "Select",
+   "label": "Symptoms",
+   "options": "\nYes\nNo",
+   "depends_on": "eval:doc.cervical_screening==\"Done\"",
+   "mandatory_depends_on": "eval:doc.cervical_screening==\"Done\""
+  },
+  {
+   "fieldname": "cervical_abnormal_bleeding",
+   "fieldtype": "Select",
+   "label": "Abnormal bleeding per vaginum",
+   "options": "\nNone\nPost Menopausal bleeding\nPost coital bleeding\nInter menstrual bleeding\nDUB\nOthers",
+   "depends_on": "eval:doc.cervical_screening==\"Done\" && doc.cervical_symptoms",
+   "mandatory_depends_on": "eval:doc.cervical_screening==\"Done\" && doc.cervical_symptoms"
+  },
+  {
+   "fieldname": "cervical_abnormal_bleeding_other",
+   "fieldtype": "Data",
+   "label": "Others (Specify)",
+   "depends_on": "eval:doc.cervical_screening==\"Done\" && doc.cervical_abnormal_bleeding==\"Others\"",
+   "mandatory_depends_on": "eval:doc.cervical_screening==\"Done\" && doc.cervical_abnormal_bleeding==\"Others\""
+  },
+  {
+   "fieldname": "cervical_visual_inspection",
+   "fieldtype": "Select",
+   "label": "Visual Inspection",
+   "options": "\nYes\nNo\nNot now\nNot seen\nHysterectomy",
+   "depends_on": "eval:doc.cervical_screening==\"Done\" && doc.cervical_abnormal_bleeding",
+   "mandatory_depends_on": "eval:doc.cervical_screening==\"Done\" && doc.cervical_abnormal_bleeding"
+  },
+  {
+   "fieldname": "cervical_visual_inspection_findings",
+   "fieldtype": "Table MultiSelect",
+   "label": "Visual Inspection Findings",
+   "options": "Cervix Visual Finding Child",
+   "depends_on": "eval:doc.cervical_screening==\"Done\" && doc.cervical_visual_inspection==\"Yes\""
+  },
+  {
+   "fieldname": "column_break_cervical",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "hr_hpv_dna",
+   "fieldtype": "Select",
+   "label": "HR-HPV DNA",
+   "options": "\nYes\nNo\nNot now",
+   "depends_on": "eval:doc.cervical_screening==\"Done\" && doc.cervical_visual_inspection",
+   "mandatory_depends_on": "eval:doc.cervical_screening==\"Done\" && doc.cervical_visual_inspection"
+  },
+  {
+   "fieldname": "hr_hpv_dna_report_date",
+   "fieldtype": "Date",
+   "label": "HR-HPV DNA Report Date",
+   "depends_on": "eval:doc.cervical_screening==\"Done\" && doc.hr_hpv_dna==\"Yes\"",
+   "mandatory_depends_on": "eval:doc.cervical_screening==\"Done\" && doc.hr_hpv_dna==\"Yes\""
+  },
+  {
+   "fieldname": "hr_hpv_dna_result",
+   "fieldtype": "Table MultiSelect",
+   "label": "HR-HPV DNA Result",
+   "options": "HPV DNA Result Child",
+   "depends_on": "eval:doc.cervical_screening==\"Done\" && doc.hr_hpv_dna==\"Yes\"",
+   "mandatory_depends_on": "eval:doc.cervical_screening==\"Done\" && doc.hr_hpv_dna==\"Yes\""
+  },
+  {
+   "fieldname": "hr_hpv_dna_report",
+   "fieldtype": "Select",
+   "label": "HR-HPV DNA Report",
+   "options": "\nPositive\nNegative\nInvalid\nOthers",
+   "depends_on": "eval:doc.cervical_screening==\"Done\" && doc.hr_hpv_dna==\"Yes\"",
+   "mandatory_depends_on": "eval:doc.cervical_screening==\"Done\" && doc.hr_hpv_dna==\"Yes\""
+  },
+  {
+   "fieldname": "hr_hpv_genotype",
+   "fieldtype": "Data",
+   "label": "Genotype",
+   "depends_on": "eval:doc.cervical_screening==\"Done\" && doc.hr_hpv_dna==\"Yes\" && doc.hr_hpv_dna_report==\"Positive\""
+  },
+  {
+   "fieldname": "cytology",
+   "fieldtype": "Select",
+   "label": "Cytology",
+   "options": "\nYes\nNo\nNot now",
+   "depends_on": "eval:doc.cervical_screening==\"Done\" && doc.cervical_visual_inspection",
+   "mandatory_depends_on": "eval:doc.cervical_screening==\"Done\" && doc.cervical_visual_inspection"
+  },
+  {
+   "fieldname": "cytology_report_date",
+   "fieldtype": "Date",
+   "label": "Cytology Report Date",
+   "depends_on": "eval:doc.cervical_screening==\"Done\" && doc.cytology==\"Yes\""
+  },
+  {
+   "fieldname": "cytology_report",
+   "fieldtype": "Select",
+   "label": "Cytology Report",
+   "options": "\nNILM\nASC-US\nLSIL\nASC-H\nHSIL\nAGC\nSquamous cell carcinoma\nUnsatisfactory\nOthers",
+   "depends_on": "eval:doc.cervical_screening==\"Done\" && doc.cytology==\"Yes\""
+  },
+  {
+   "fieldname": "visual_test",
+   "fieldtype": "Select",
+   "label": "Visual Test",
+   "options": "\nYes\nNo\nNot now",
+   "depends_on": "eval:doc.cervical_screening==\"Done\" && doc.cervical_visual_inspection",
+   "mandatory_depends_on": "eval:doc.cervical_screening==\"Done\" && doc.cervical_visual_inspection"
+  },
+  {
+   "fieldname": "visual_test_report_date",
+   "fieldtype": "Date",
+   "label": "Visual Test Report Date",
+   "depends_on": "eval:doc.cervical_screening==\"Done\" && doc.visual_test==\"Yes\"",
+   "mandatory_depends_on": "eval:doc.cervical_screening==\"Done\" && doc.visual_test==\"Yes\""
+  },
+  {
+   "fieldname": "visual_test_report",
+   "fieldtype": "Select",
+   "label": "Visual Test Report",
+   "options": "\nPositive\nNegative\nInconclusive",
+   "depends_on": "eval:doc.cervical_screening==\"Done\" && doc.visual_test==\"Yes\"",
+   "mandatory_depends_on": "eval:doc.cervical_screening==\"Done\" && doc.visual_test==\"Yes\""
+  },
+  {
+   "fieldname": "cervical_referral",
+   "fieldtype": "Select",
+   "label": "Referral",
+   "options": "\nYes\nNo",
+   "depends_on": "eval:doc.cervical_screening==\"Done\" && doc.cervical_visual_inspection && doc.hr_hpv_dna && doc.cytology && doc.visual_test"
+  },
+  {
+   "fieldname": "cervical_referred_for",
+   "fieldtype": "Table MultiSelect",
+   "label": "Referred for",
+   "options": "Cervical Referral Child",
+   "depends_on": "eval:doc.cervical_screening==\"Done\" && doc.cervical_referral==\"Yes\"",
+   "description": "Finishing this will move patient to clinical evaluation"
+  },
+  {
+   "fieldname": "cervical_screening_completed_note",
+   "fieldtype": "HTML",
+   "label": "Screening Completed",
+   "options": "<p><b>Screening is completed.</b> Patient will NOT move to clinical evaluation.</p>",
+   "depends_on": "eval:doc.cervical_screening==\"Done\" && doc.cervical_referral==\"No\""
   },
   {
    "fieldname": "tab_2_tab",
    "fieldtype": "Tab Break",
    "label": "Tab 2"
+  },
+  {
+   "depends_on": "eval:doc.if_leukoplakia__is_yes==\"Site\"",
+   "fieldname": "if_site",
+   "fieldtype": "Data",
+   "label": "If Site"
+  },
+  {
+   "depends_on": "eval:doc.if_leukoplakia__is_yes==\"Size\"",
+   "fieldname": "if_size",
+   "fieldtype": "Data",
+   "label": "If Size"
+  },
+  {
+   "depends_on": "eval:doc.if_erthyroplakia_yes==\"Site\"",
+   "fieldname": "if_site_copy",
+   "fieldtype": "Data",
+   "label": "If Site"
+  },
+  {
+   "depends_on": "eval:doc.if_non_healing_ulcer_yes==\"Site\"",
+   "fieldname": "if_site_copy_copy",
+   "fieldtype": "Data",
+   "label": "If Site"
+  },
+  {
+   "depends_on": "eval:doc.if_erthyroplakia_yes==\"Size\"",
+   "fieldname": "if_size_copy",
+   "fieldtype": "Data",
+   "label": "If Size"
+  },
+  {
+   "depends_on": "eval:doc.if_non_healing_ulcer_yes==\"Size\"",
+   "fieldname": "if_size_copy_copy",
+   "fieldtype": "Data",
+   "label": "If Size"
+  },
+  {
+   "fieldname": "ulcer",
+   "fieldtype": "Select",
+   "label": "Ulcer",
+   "options": "\nYes\nNo"
+  },
+  {
+   "fieldname": "if_ulcer",
+   "fieldtype": "Select",
+   "label": "If Ulcer",
+   "options": "\nSite\nSize"
+  },
+  {
+   "depends_on": "eval:doc.if_ulcer==\"Site\"",
+   "fieldname": "site_ulcer",
+   "fieldtype": "Data",
+   "label": "If Site"
+  },
+  {
+   "depends_on": "eval:doc.if_ulcer==\"Size\"",
+   "fieldname": "size_ulcer",
+   "fieldtype": "Data",
+   "label": "If Size"
+  },
+  {
+   "fieldname": "tobacco_pouch_keratosis",
+   "fieldtype": "Select",
+   "label": "Tobacco pouch keratosis",
+   "options": "\nYes\nNo"
+  },
+  {
+   "depends_on": "eval:doc.tobacco_pouch_keratosis==\"Yes\"",
+   "fieldname": "if_tobacco_pouch_keratosi_yes",
+   "fieldtype": "Data",
+   "label": "If Tobacco pouch keratosi Yes"
+  },
+  {
+   "fieldname": "other",
+   "fieldtype": "Select",
+   "label": "Others",
+   "options": "\nYes\nNo"
+  },
+  {
+   "depends_on": "eval:doc.other==\"Yes\"",
+   "fieldname": "others_o",
+   "fieldtype": "Data",
+   "label": "If Others"
+  },
+  {
+   "fieldname": "h5cancerous_lesionh",
+   "fieldtype": "Heading",
+   "label": "<h5>Cancerous lesion</h5>"
+  },
+  {
+   "fieldname": "cancerous_lesion",
+   "fieldtype": "Select",
+   "label": "Cancerous lesion",
+   "options": "\nYes\nNo"
+  },
+  {
+   "fieldname": "if_cancerous_lesion_yes",
+   "fieldtype": "Select",
+   "label": "If Cancerous lesion Yes",
+   "options": "\nSite\nSize\nAppearance"
+  },
+  {
+   "depends_on": "eval:doc.if_cancerous_lesion_yes==\"Site\"",
+   "fieldname": "site_can",
+   "fieldtype": "Data",
+   "label": "If Site"
+  },
+  {
+   "depends_on": "eval:doc.if_cancerous_lesion_yes==\"Size\"",
+   "fieldname": "if_size_ca",
+   "fieldtype": "Data",
+   "label": "If Size"
+  },
+  {
+   "depends_on": "eval:doc.if_cancerous_lesion_yes==\"Appearance\"",
+   "fieldname": "appearance",
+   "fieldtype": "Data",
+   "label": "Appearance"
+  },
+  {
+   "fieldname": "h5significant_cervical_nodesh",
+   "fieldtype": "Heading",
+   "label": "<h5>Significant Cervical nodes</h5>"
+  },
+  {
+   "fieldname": "significant_cervical_nodes",
+   "fieldtype": "Select",
+   "label": "Significant Cervical nodes",
+   "options": "\nYes\nNo"
+  },
+  {
+   "fieldname": "refferal",
+   "fieldtype": "Select",
+   "label": "Refferal",
+   "options": "\nYes\nNo"
+  },
+  {
+   "depends_on": "eval:doc.refferal==\"Yes\"",
+   "fieldname": "if_refferal_yes",
+   "fieldtype": "Select",
+   "label": "If Refferal Yes",
+   "options": "\nTCC\nReferral for Oral Malignant Potential Disease\nReferral for Cancerous lesion"
+  },
+  {
+   "depends_on": "eval:doc.if_refferal_yes==\"Referral for Cancerous lesion\"",
+   "fieldname": "if__referral_for_cancerous_lesion",
+   "fieldtype": "Select",
+   "label": "If  Referral for Cancerous lesion",
+   "options": "\nThis is a single select option\nChoosing this will move patient to clinical evaluation"
+  },
+  {
+   "depends_on": "eval:doc.refferal==\"No\"",
+   "fieldname": "if_no_is_chosen_then_screening_is_completed",
+   "fieldtype": "Select",
+   "label": "If No is chosen, then screening is completed",
+   "options": "Patient will NOT move to clinical evaluation"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-10-14 16:09:42.134135",
+ "modified": "2026-10-14 17:30:00.000000",
  "modified_by": "Administrator",
  "module": "Cancer-collab",
  "name": "Main Screening Form",
