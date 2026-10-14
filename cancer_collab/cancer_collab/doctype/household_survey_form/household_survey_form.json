@@ -1,0 +1,214 @@
+{
+ "actions": [],
+ "allow_bulk_edit": 1,
+ "allow_rename": 1,
+ "creation": "2026-10-13 17:13:15.621908",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "household_survey_form_section",
+  "name1",
+  "age",
+  "gender",
+  "spouse__father_name",
+  "present_house",
+  "door_no",
+  "street_name",
+  "village",
+  "panchayat",
+  "town__area",
+  "state",
+  "pin_code",
+  "landmark_if_any",
+  "column_break_aflt",
+  "mobile_number",
+  "alternate_mobile_number",
+  "survey_done",
+  "if_no_reasons",
+  "eligible",
+  "if_no",
+  "mismatch_age_yrs",
+  "if_others",
+  "h5id_detailsh",
+  "aadhar_card",
+  "voter_id",
+  "ration_card",
+  "religion"
+ ],
+ "fields": [
+  {
+   "fieldname": "household_survey_form_section",
+   "fieldtype": "Section Break",
+   "label": "Household Survey Form"
+  },
+  {
+   "fieldname": "name1",
+   "fieldtype": "Data",
+   "label": "Name"
+  },
+  {
+   "fieldname": "age",
+   "fieldtype": "Int",
+   "label": "Age"
+  },
+  {
+   "fieldname": "gender",
+   "fieldtype": "Select",
+   "label": "Gender",
+   "options": "\nMale\nFemale\nOther"
+  },
+  {
+   "fieldname": "spouse__father_name",
+   "fieldtype": "Data",
+   "label": "Spouse / Father Name"
+  },
+  {
+   "fieldname": "present_house",
+   "fieldtype": "Select",
+   "label": "Present House",
+   "options": "\nRental\nOwn"
+  },
+  {
+   "fieldname": "door_no",
+   "fieldtype": "Data",
+   "label": "Door No"
+  },
+  {
+   "fieldname": "street_name",
+   "fieldtype": "Data",
+   "label": "Street Name"
+  },
+  {
+   "fieldname": "village",
+   "fieldtype": "Data",
+   "label": "Village"
+  },
+  {
+   "fieldname": "panchayat",
+   "fieldtype": "Data",
+   "label": "Panchayat"
+  },
+  {
+   "fieldname": "town__area",
+   "fieldtype": "Data",
+   "label": "Town / Area"
+  },
+  {
+   "fieldname": "state",
+   "fieldtype": "Data",
+   "label": "State"
+  },
+  {
+   "fieldname": "pin_code",
+   "fieldtype": "Int",
+   "label": "Pin Code"
+  },
+  {
+   "fieldname": "landmark_if_any",
+   "fieldtype": "Data",
+   "label": "Landmark if Any"
+  },
+  {
+   "fieldname": "column_break_aflt",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "mobile_number",
+   "fieldtype": "Phone",
+   "label": "Mobile Number"
+  },
+  {
+   "fieldname": "alternate_mobile_number",
+   "fieldtype": "Phone",
+   "label": "Alternate Mobile Number"
+  },
+  {
+   "fieldname": "survey_done",
+   "fieldtype": "Select",
+   "label": "Survey Done",
+   "options": "\nYes\nNo"
+  },
+  {
+   "depends_on": "eval:doc.survey_done==\"No\"",
+   "fieldname": "if_no_reasons",
+   "fieldtype": "Select",
+   "label": "If No Reasons",
+   "options": "\nRefused\nDoor Locked\nWork - Out of Station\nOut of Station - Short Visit\nAlready Screened\nSettled Outstation\nMedical Reasons"
+  },
+  {
+   "fieldname": "eligible",
+   "fieldtype": "Select",
+   "label": "Eligible",
+   "options": "\nYes\nNo"
+  },
+  {
+   "fieldname": "if_no",
+   "fieldtype": "Select",
+   "label": "If No",
+   "options": "\nAge Mismatch\nKnown Cancer Patient\nOthers"
+  },
+  {
+   "fieldname": "mismatch_age_yrs",
+   "fieldtype": "Data",
+   "label": "Mismatch Age Yrs"
+  },
+  {
+   "fieldname": "if_others",
+   "fieldtype": "Data",
+   "label": "If Others"
+  },
+  {
+   "fieldname": "h5id_detailsh",
+   "fieldtype": "Heading",
+   "label": "<h5>ID Details</h5>"
+  },
+  {
+   "fieldname": "aadhar_card",
+   "fieldtype": "Data",
+   "label": "Aadhar Card"
+  },
+  {
+   "fieldname": "voter_id",
+   "fieldtype": "Data",
+   "label": "Voter ID"
+  },
+  {
+   "fieldname": "ration_card",
+   "fieldtype": "Data",
+   "label": "Ration Card"
+  },
+  {
+   "fieldname": "religion",
+   "fieldtype": "Select",
+   "label": "Religion",
+   "options": "\nHindu\nMuslim\nChristian\nOthers"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-10-14 16:10:08.854444",
+ "modified_by": "Administrator",
+ "module": "Cancer-collab",
+ "name": "Household Survey Form",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}
