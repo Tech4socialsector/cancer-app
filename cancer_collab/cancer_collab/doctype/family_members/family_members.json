@@ -7,7 +7,10 @@
  "engine": "InnoDB",
  "field_order": [
   "family_members_section",
+  "hhid",
+  "household_head_name",
   "name1",
+  "relationship_of_the_family_member",
   "total_family_members",
   "date_of_birth",
   "age",
@@ -15,8 +18,8 @@
   "maritail_status",
   "occupation",
   "monthly_income",
-  "toba",
   "column_break_aiji",
+  "toba",
   "eligible",
   "familys_total_income",
   "survey_done_by",
@@ -34,7 +37,7 @@
   {
    "fieldname": "name1",
    "fieldtype": "Data",
-   "label": "Name"
+   "label": "Family Member Name"
   },
   {
    "fieldname": "total_family_members",
@@ -59,14 +62,14 @@
   },
   {
    "fieldname": "maritail_status",
-   "fieldtype": "Data",
-   "label": "Maritail Status"
+   "fieldtype": "Select",
+   "label": "Maritail Status",
+   "options": "\nSingle\nMarried\nWidowed\nDivorced\nOthers"
   },
   {
    "fieldname": "occupation",
-   "fieldtype": "Link",
-   "label": "Occupation",
-   "options": "Occupation Master"
+   "fieldtype": "Data",
+   "label": "Occupation"
   },
   {
    "fieldname": "monthly_income",
@@ -118,12 +121,29 @@
    "fieldname": "date_of_survey_done",
    "fieldtype": "Date",
    "label": "Date of Survey Done"
+  },
+  {
+   "fieldname": "hhid",
+   "fieldtype": "Link",
+   "label": "HHID",
+   "options": "Household Survey Form"
+  },
+  {
+   "fieldname": "relationship_of_the_family_member",
+   "fieldtype": "Data",
+   "label": "Relationship of the Family Member"
+  },
+  {
+   "fetch_from": "hhid.name1",
+   "fieldname": "household_head_name",
+   "fieldtype": "Data",
+   "label": "Household head Name"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-10-14 16:09:58.401784",
+ "modified": "2026-10-14 17:24:30.796299",
  "modified_by": "Administrator",
  "module": "Cancer-collab",
  "name": "Family Members",
